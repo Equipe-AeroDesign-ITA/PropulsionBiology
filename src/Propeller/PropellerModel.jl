@@ -39,7 +39,7 @@ function build_propeller_DB(propeller_database_name::String)
         fit_cq = curve_fit(propeller_coeff_model, x, Cq, zeros(21))
         cq(J, RPM) = propeller_coeff_model([J, RPM], fit_cq.param)
         D = 0.0254*parse(Float64, data[1,5])
-        M = 0.100 # Depois ajeito isso
+        M = data."Massa (kg)"
         PropellerDB[sheet] = Propeller(sheet, D, M, ct, cq)
     end
 
