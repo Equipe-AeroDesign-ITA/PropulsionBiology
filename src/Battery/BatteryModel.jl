@@ -32,7 +32,7 @@ function build_battery_DB(battery_database_name::String)
     for (name, type, cells, capacity, C, resistance, mass, observation, acqured) in zip(data...)
         voltages = VOLTAGE_CELL[type]
         # Calculando 90% do intervalo de voltagem máximo
-        cell_voltage = voltages[:empty] + 1.0*(voltages[:full] - voltages[:empty]) 
+        cell_voltage = voltages[:empty] + 0.9*(voltages[:full] - voltages[:empty]) 
         # Multiplicando pelo número de células
         total_voltage = cells*cell_voltage
         max_current = (total_voltage - voltages.empty*1.05*cells)/resistance # Corrente máxima de operação para que a tensão fique quase no mínimo
@@ -44,7 +44,6 @@ end
 const VOLTAGE_CELL = Dict(
     "LiPO" => (nominal=3.7, full=4.2, empty=3.0),
     "LiPOHV" => (nominal=3.8, full=4.35, empty=3.0),
-    "LiPO" => (nominal=3.7, full=4.2, empty=3.0),
     "LiFe" => (nominal=3.3, full=3.65, empty=2.8)
 )
 
