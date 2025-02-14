@@ -1,0 +1,24 @@
+name = "PropulsionBiology"
+uuid = "d2a35b78-da7a-4ff2-aced-d87a5ee8bce2"
+authors = ["JoseJunior4144 <xjuniorcp@gmail.com>"]
+version = "0.1.0"
+
+[deps]
+COESA = "13e0c4e3-fd7a-51bf-9e22-ec7679f18909"
+DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
+LsqFit = "2fda8390-95c7-5789-9bda-21331edee243"
+NLsolve = "2774e3e8-f4cf-5e23-947b-6d7e65073b56"
+Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
+Printf = "de0858da-6303-5e67-8744-51eddeeeb8d7"
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+XLSX = "fdbf4ff8-1666-58a4-91e7-1b58723a45e0"
+
+[compat]
+COESA = "1.0.0"
+DataFrames = "1.7.0"
+LsqFit = "0.15.0"
+NLsolve = "4.5.1"
+Plots = "1.40.9"
+Printf = "1.11.0"
+Test = "1.11.0"
+XLSX = "0.10.4"
