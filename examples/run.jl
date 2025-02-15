@@ -11,14 +11,14 @@ init_databases(
 
 # Definição dos conjuntos de propulsão a comparar
 propulsion_sets = [
-    (nome="SII-4035 27x13 6S", bateria=BatteryDB["GNB HV Flight 3000mAh 6S "], motor=MotorDB["SII-4035"], helice=PropellerDB["APC27x13E"]),
-    (nome="MN601 27x13 5S", bateria=BatteryDB["GNB HV 1700mAh 5S"], motor=MotorDB["MN601S"], helice=PropellerDB["APC27x13E"]),
-    (nome="MN601 27x13 4S", bateria=BatteryDB["Tatto 2300mAh 4S"], motor=MotorDB["MN601S"], helice=PropellerDB["APC27x13E"])
+    (nome="MN601 24x12 6S", bateria=BatteryDB["GNB HV Flight 3000mAh 6S "], motor=MotorDB["MN601S"], helice=PropellerDB["APC24x12E"]),
+    (nome="MN601 24x12 5S", bateria=BatteryDB["GNB HV 1700mAh 5S"], motor=MotorDB["MN601S"], helice=PropellerDB["APC24x12E"]),
+    (nome="MN601 24x12 4S", bateria=BatteryDB["Tatto 2300mAh 4S"], motor=MotorDB["MN601S"], helice=PropellerDB["APC24x12E"])
 ]
 
-potencia = 50000 # W
+potencia = 600.0 # W
 tempo = 180.0    # voo
-altdens = 500.0  # m
+altdens = 1000.0  # m
 v_ar = range(0, 30, 31)
 
 # Inicializa dicionários para armazenar resultados de cada métrica para cada conjunto
@@ -106,7 +106,7 @@ for cfg in propulsion_sets
 end
 
 # Layout com os plots
-layout = @layout [a; b c; d e; f g]
-x = plot(p1, p2, p3, p4, p5, p6, p7, layout=layout, size=(1200,1200))
-display(x)
+layout = @layout [a; b c d; e f g]
+graph = plot(p1, p2, p3, p4, p5, p6, p7, layout=layout, size=(800,800))
+display(graph)
 #savefig(bateria.name*(" ")*motor.name*(" ")*helice.name)
