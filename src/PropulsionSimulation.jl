@@ -120,22 +120,23 @@ function run_propulsion_by_power(batt, motor, prop, max_power, v_ar, altdens, ti
     Qm = 0.0
     T = 0.0
 
+    mass = batt.mass + motor.mass + prop.mass
+
     while Π < 1.0
         Π, I, V, P, RPM, Qm, T, valid, msg = run_propulsion_by_input(batt, motor, prop, Π, v_ar, altdens, time)
         if valid == false
             msg = join(msg)
-            return Π, I, V, P, RPM, Qm, T, msg
+            return Π, I, V, P, RPM, Qm, T, msg, mass
         end
 
         if P > max_power || abs(P-max_power) < 1.0 # Condição para 'chegada' na potência.
             msg = "✅ Potência alvo atingida! Simulação finalizada."
-            return Π, I, V, P, RPM, Qm, T, msg
+            return Π, I, V, P, RPM, Qm, T, msg, mass
         end
 
         Π += 0.0001
     end
     msg = "⚠️ Manete chegou ao máximo sem atingir a potência desejada."
-    mass = batt.mass + motor.mass + prop.mass
     return Π, I, V, P, RPM, Qm, T, msg, mass
 end
 
