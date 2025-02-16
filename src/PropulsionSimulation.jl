@@ -65,7 +65,8 @@ function run_propulsion_by_input(batt, motor, prop, Π, v_ar, altdens, time)
     T = ρ*(RPM/60)^2*D^4*(prop.Ct(J, RPM)[1])
 
     valid, msg = check_constraints(batt, motor, prop, I_val, RPM, Qmotor_val, time, altdens)
-    return Π, I_val, V, P, RPM, Qmotor_val, T, valid, msg
+    mass = batt.mass + motor.mass + prop.mass
+    return Π, I_val, V, P, RPM, Qmotor_val, T, valid, msg, mass
 end
 
 """
@@ -121,7 +122,7 @@ function run_propulsion_by_power(batt, motor, prop, max_power, v_ar, altdens, ti
     T = 0.0
 
     while Π < 1.0
-        Π, I, V, P, RPM, Qm, T, valid, msg = run_propulsion_by_input(batt, motor, prop, Π, v_ar, altdens, time)
+        Π, I, V, P, RPM, Qm, T, valid, msg, mass = run_propulsion_by_input(batt, motor, prop, Π, v_ar, altdens, time)
         if valid == false
             msg = join(msg)
             return Π, I, V, P, RPM, Qm, T, msg
@@ -135,7 +136,7 @@ function run_propulsion_by_power(batt, motor, prop, max_power, v_ar, altdens, ti
         Π += 0.0001
     end
     msg = "⚠️ Manete chegou ao máximo sem atingir a potência desejada."
-    return Π, I, V, P, RPM, Qm, T, msg
+    return Π, I, V, P, RPM, Qm, T, msg, mass
 end
 
 end  # Fim do módulo
