@@ -11,15 +11,14 @@ init_databases(
 
 # Definição dos conjuntos de propulsão a comparar
 propulsion_sets = [
-    (nome="MN601 24x12 6S", bateria=BatteryDB["GNB HV Flight 3000mAh 6S "], motor=MotorDB["MN601S"], helice=PropellerDB["APC24x12E"]),
-    (nome="MN601 24x12 5S", bateria=BatteryDB["GNB HV 1700mAh 5S"], motor=MotorDB["MN601S"], helice=PropellerDB["APC24x12E"]),
-    (nome="MN601 24x12 4S", bateria=BatteryDB["Tatto 2300mAh 4S"], motor=MotorDB["MN601S"], helice=PropellerDB["APC24x12E"])
+    (nome="MN601 21x12WE 5S", bateria=BatteryDB["GNB HV 1700mAh 5S"], motor=MotorDB["MN601S"], helice=PropellerDB["APC21x12WE"]),
+    (nome="MN601 27X12E 4S", bateria=BatteryDB["Tatto 2300mAh 4S"], motor=MotorDB["MN601S"], helice=PropellerDB["APC27x13E"]),
 ]
 
 potencia = 600.0 # W
 tempo = 180.0    # voo
 altdens = 1000.0  # m
-v_ar = range(0, 30, 31)
+v_ar = range(0, 20, 21)
 
 # Inicializa dicionários para armazenar resultados de cada métrica para cada conjunto
 results = Dict{String,Dict{Symbol,Vector{Float64}}}()

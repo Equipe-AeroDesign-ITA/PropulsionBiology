@@ -1,13 +1,13 @@
-using PropulsionBiology, LsqFit, Plots
+using PropulsionBiology, Plots, LsqFit
 
 init_databases()
 
-bateria = BatteryDB["Tatto 2300mAh 4S"]
 motor = MotorDB["MN601S"]
-propeller = PropellerDB["APC27x13E"]
+bateria = BatteryDB["GNB HV 1700mAh 5S"]
+propeller = PropellerDB["APC21x12WE"]
 potencia = 600.0
 tempo = 180.0
-altdens = 1000.0
+altdens = 1400
 v_ar = range(0, 20, 21)
 
 T = []
@@ -19,15 +19,23 @@ for v in v_ar
     push!(T, sim[7])
 end
 
-function model(x, p)
+function model_torque(x, p)
     p0, p1, p2, p3, p4 = p
     return p0 .+ p1.*x .+ p2.*x.^2 .+ p3.*x.^3 .+ p4.*x.^4
 end
 
-fit_traction = curve_fit(model, v_ar, T, [0.0, 0.0, 0.0, 0.0, 0.0])
+function model_traction(x, p)
+    p0, p1, p2 = p
+    return p0 .+ p1.*x .+ p2.*x.^2
+end
+
+fit_traction = curve_fit(model_traction, v_ar, T, [0.0, 0.0, 0.0])
 T_fit = fit_traction.param
-fit_torque = curve_fit(model, v_ar, Q, [0.0, 0.0, 0.0, 0.0, 0.0])
+println(T_fit)
+fit_torque = curve_fit(model_torque, v_ar, Q, [0.0, 0.0, 0.0, 0.0, 0.0])
 Q_fit = fit_torque.param
+println(Q_fit)
+
 
 plot(v_ar, T, xlabel="Velocidade do ar [m/s]", ylabel="Tração [N]", label="Dados brutos")
 plot!(v_ar, model(v_ar, T_fit), label="Fit", linestyle=:dash)
